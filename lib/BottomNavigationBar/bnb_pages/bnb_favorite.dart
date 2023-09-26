@@ -27,6 +27,7 @@ class _BNBFavoritePageState extends State<BNBFavoritePage> {
                     .toString(),
               ),
             ),
+            // this is the test
             Expanded(
               child: InkWell(
                 onTap: () {
@@ -44,6 +45,24 @@ class _BNBFavoritePageState extends State<BNBFavoritePage> {
                 ),
               ),
             ),
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  setState(() {});
+                },
+                child: ListView.builder(
+                  itemCount: postsProvider.data
+                      .where((element) => element.isLiked == true)
+                      .length,
+                  itemBuilder: (context, index) {
+                    return PostWidget(postsProvider.data
+                        .where((element) => element.isLiked == true)
+                        .toList()[index]);
+                  },
+                ),
+              ),
+            ),
+
           ],
         );
       },
