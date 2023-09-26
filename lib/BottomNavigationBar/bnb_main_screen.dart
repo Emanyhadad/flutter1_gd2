@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/BottomNavigationBar/bnb_pages/bnb_favorite.dart';
@@ -26,6 +27,7 @@ class _BNBMainPageState extends State<BNBMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("AppName".tr()),
         actions: [
           Switch(
             value: Util.isDark,
@@ -33,6 +35,18 @@ class _BNBMainPageState extends State<BNBMainPage> {
               Util.isDark = !Util.isDark;
               widget.function();
             },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Locale local = context.locale;
+              bool isArabic = local == Locale("ar");
+              if (isArabic) {
+                context.setLocale(Locale("en"));
+              } else {
+                context.setLocale(Locale("en"));
+              }
+            },
+            child: Text("ChangeLang".tr()),
           )
         ],
       ),
@@ -44,7 +58,8 @@ class _BNBMainPageState extends State<BNBMainPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorite"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: "Favorite"),
         ],
         currentIndex: widget.index,
         onTap: (value) {

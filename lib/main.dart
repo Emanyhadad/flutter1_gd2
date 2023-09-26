@@ -13,8 +13,11 @@ import 'Lacture17_9/post_screen2.dart';
 import 'list_view.dart';
 import 'PostAssignment/data.dart';
 import 'PostAssignment/util.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
@@ -29,7 +32,13 @@ void main() {
           },
         ),
       ],
-      child: const MyApp(),
+      child: EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        // <-- change the path of the translation files
+        fallbackLocale: Locale('en'),
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -61,5 +70,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-

@@ -4,10 +4,19 @@ import '../PostAssignment/data.dart';
 import '../PostAssignment/util.dart';
 
 class PostsProvider extends ChangeNotifier {
-  List<PostModel> data = postData.map((e) => PostModel(e)).toList();
+  PostsProvider(){
+    fillData();
+  }
+  List<PostModel> data =[];
+  fillData(){
+    data =  postData.map((e) => PostModel(e)).toList();
+  }
 
   toggleFav(PostModel postModel){
-    postModel.isLiked = !postModel.isLiked!;
+  int x =   data.indexOf(postModel);
+  // data[x].isLiked = !data[x].isLiked;
+  data.removeAt(x);
+    // postModel.isLiked = !postModel.isLiked!;
     notifyListeners();
   }
 }
